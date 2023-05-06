@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+//* component *//
 import { App } from "./App";
+
+//* styles *//
+import "@/scss/global.scss";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
