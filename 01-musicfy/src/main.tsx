@@ -12,9 +12,7 @@ import "@/scss/global.scss";
 import "@/utils/firebase";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );
 
 postMessage({ payload: "removeLoading" }, "*");
