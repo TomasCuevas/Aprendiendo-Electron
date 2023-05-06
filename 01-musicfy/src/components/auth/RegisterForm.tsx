@@ -19,7 +19,6 @@ export const RegisterForm: React.FC<Props> = ({ goBack, goLogin }) => {
           placeholder="Correo electronico"
           icon="mail outline"
           type="text"
-          error={true}
         />
         <Form.Input
           placeholder="Contraseña"

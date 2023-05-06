@@ -20,4 +20,18 @@
       }
     }
   }
+
+  .field.error {
+    .ui.input {
+      input {
+        background-color: $background-secondary;
+        border: 1px solid $danger;
+        color: $danger;
+      }
+
+      i {
+        color: $danger;
+      }
+    }
+  }
 }
