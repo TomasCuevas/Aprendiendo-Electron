@@ -1,0 +1,23 @@
+@import "@/scss/index.scss";
+
+.ui.form {
+  .field {
+    .input {
+      input {
+        background-color: $background-secondary;
+        border-color: $background-secondary;
+        color: $font-light;
+
+        &:hover,
+        &active,
+        &focus {
+          background-color: $background-secondary;
+        }
+      }
+
+      i {
+        color: $font-light;
+      }
+    }
+  }
+}
