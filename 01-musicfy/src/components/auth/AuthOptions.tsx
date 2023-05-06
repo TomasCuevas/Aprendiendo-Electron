@@ -1,5 +1,8 @@
 import { Button } from "semantic-ui-react";
 
+//* styles *//
+import "@/components/auth/authOptions.scss";
+
 //* interface *//
 interface Props {
   goLogin(): void;
@@ -8,14 +11,14 @@ interface Props {
 
 export const AuthOptions: React.FC<Props> = ({ goLogin, goRegister }) => {
   return (
-    <div style={{ backgroundColor: "#000" }}>
-      <h1>AuthOptions</h1>
+    <div className="auth-options">
+      <h1>Millones de canciones gratis en Musicfy</h1>
 
-      <Button primary onClick={goRegister}>
-        Registro
+      <Button className="register" onClick={goRegister}>
+        Registrate gratis
       </Button>
-      <Button secondary onClick={goLogin}>
-        Login
+      <Button className="login" onClick={goLogin}>
+        Iniciar Sesión
       </Button>
     </div>
   );
