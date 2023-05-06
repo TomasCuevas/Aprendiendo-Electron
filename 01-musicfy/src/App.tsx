@@ -12,7 +12,7 @@ export const App: React.FC = () => {
   const auth = getAuth();
 
   onAuthStateChanged(auth, (user) => {
-    setUser({ name: "Tomás Cuevas" });
+    setUser(user);
   });
 
   if (user === undefined) return <></>;
