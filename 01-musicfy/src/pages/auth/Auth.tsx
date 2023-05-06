@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { Image } from "semantic-ui-react";
+
+//* assets *//
+import { logoNameWhite } from "@/assets";
 
 //* components *//
 import { AuthOptions, LoginForm, RegisterForm } from "@/components/auth";
@@ -25,5 +29,16 @@ export const Auth: React.FC = () => {
     return <AuthOptions goLogin={goLogin} goRegister={goRegister} />;
   };
 
-  return <div>{renderForm()}</div>;
+  return (
+    <div className="auth">
+      <div className="auth__content">
+        <Image
+          src={logoNameWhite}
+          alt="Musicfy"
+          className="auth__content-logo"
+        />
+        {renderForm()}
+      </div>
+    </div>
+  );
 };
