@@ -1,3 +1,10 @@
+import { Button } from "semantic-ui-react";
+
 export const App: React.FC = () => {
-  return <h1>Hola Mundo</h1>;
+  return (
+    <>
+      <Button primary>Primary</Button>
+      <Button secondary>Secondary</Button>
+    </>
+  );
 };
