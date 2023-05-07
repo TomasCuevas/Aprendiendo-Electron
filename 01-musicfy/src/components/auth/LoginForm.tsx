@@ -3,6 +3,9 @@ import { useFormik } from "formik";
 import { Form, Icon } from "semantic-ui-react";
 import * as Yup from "yup";
 
+//* service *//
+import { loginUser } from "@/services";
+
 //* styles *//
 import "@/components/auth/loginForm.scss";
 
@@ -31,7 +34,13 @@ export const LoginForm: React.FC<Props> = ({ goBack, goRegister }) => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     validateOnChange: false,
-    onSubmit: async (formValues) => {},
+    onSubmit: async (formValues) => {
+      try {
+        await loginUser(formValues);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   });
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
