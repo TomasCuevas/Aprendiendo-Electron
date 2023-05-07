@@ -2,8 +2,12 @@ import { Form, Icon } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+//* service *//
+import { registerUser } from "@/services";
+
 //* styles *//
 import "@/components/auth/registerForm.scss";
+import { useState } from "react";
 
 //* yup validations *//
 const validationSchema = () => {
@@ -32,11 +36,19 @@ export const RegisterForm: React.FC<Props> = ({ goBack, goLogin }) => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     validateOnChange: false,
-    onSubmit: (formValues) => {
-      console.log("Registro OK");
-      console.log(formValues);
+    onSubmit: async (formValues) => {
+      try {
+        await registerUser(formValues);
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  //! on toggle show password
+  const onToggleShowPassword = () => setShowPassword((prev) => !prev);
 
   return (
     <div className="register__form">
@@ -58,12 +70,12 @@ export const RegisterForm: React.FC<Props> = ({ goBack, goLogin }) => {
           name="password"
           icon={
             <Icon
-              name="eye"
+              name={showPassword ? "eye slash" : "eye"}
               link
-              onClick={() => console.log("show password")}
+              onClick={onToggleShowPassword}
             />
           }
-          type="password"
+          type={showPassword ? "text" : "password"}
           onChange={formik.handleChange}
           error={formik.errors.password ? true : false}
         />
