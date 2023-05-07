@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Form, Icon } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,7 +8,6 @@ import { registerUser } from "@/services";
 
 //* styles *//
 import "@/components/auth/registerForm.scss";
-import { useState } from "react";
 
 //* yup validations *//
 const validationSchema = () => {
