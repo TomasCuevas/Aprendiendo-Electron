@@ -1,5 +1,9 @@
-//* styles *//
 import { Icon, Image, Input } from "semantic-ui-react";
+
+//* component *//
+import { Player } from "@/components/shared";
+
+//* styles *//
 import "./footer.scss";
 
 export const Footer: React.FC = () => {
@@ -11,7 +15,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="footer__center">
-        <p style={{ textAlign: "center" }}>PLAYER</p>
+        <Player />
       </div>
 
       <div className="footer__right">
