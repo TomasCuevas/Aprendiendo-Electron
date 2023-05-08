@@ -23,7 +23,8 @@
     "react-router-dom": "6.11.1",
     "semantic-ui-css": "2.5.0",
     "semantic-ui-react": "2.1.4",
-    "yup": "1.1.1"
+    "yup": "1.1.1",
+    "zustand": "4.3.8"
   },
   "devDependencies": {
     "@types/react": "18.0.28",
