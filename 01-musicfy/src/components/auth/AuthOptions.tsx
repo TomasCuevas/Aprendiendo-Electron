@@ -1,7 +1,7 @@
 import { Button } from "semantic-ui-react";
 
 //* styles *//
-import "@/components/auth/authOptions.scss";
+import "./authOptions.scss";
 
 //* interface *//
 interface Props {

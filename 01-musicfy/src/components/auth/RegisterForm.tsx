@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { registerUser } from "@/services";
 
 //* styles *//
-import "@/components/auth/registerForm.scss";
+import "./registerForm.scss";
 
 //* yup validations *//
 const validationSchema = () => {
