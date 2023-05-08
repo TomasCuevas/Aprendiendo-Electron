@@ -2,7 +2,7 @@
 import "./loggedLayout.scss";
 
 //* components *//
-import { LeftMenu } from "@/components/leftMenu";
+import { LeftMenu, TopBar } from "@/components/layout";
 
 //* interface *//
 interface Props {
@@ -19,7 +19,7 @@ export const LoggedLayout: React.FC<Props> = ({ children }) => {
 
         <div className="logged__layout-children-content">
           <div className="logged__layout-top-bar">
-            <p>TOP BAR</p>
+            <TopBar />
           </div>
           <div>{children}</div>
         </div>
