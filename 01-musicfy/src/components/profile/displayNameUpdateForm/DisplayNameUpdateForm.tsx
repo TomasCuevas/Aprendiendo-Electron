@@ -21,14 +21,19 @@ interface Props {
 }
 
 export const DisplayNameUpdateForm: React.FC<Props> = ({ onClose }) => {
-  const { getMe } = useUserStore();
+  const { getMe, updateDisplayName } = useUserStore();
 
   const formik = useFormik({
     initialValues: initialValues(getMe()!.displayName || ""),
     validationSchema: validationSchema,
     validateOnChange: false,
     onSubmit: async (formValues) => {
-      console.log(formValues);
+      try {
+        await updateDisplayName(formValues.displayName);
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 

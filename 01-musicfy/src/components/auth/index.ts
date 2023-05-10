@@ -1,3 +1,3 @@
-export * from "./AuthOptions";
-export * from "./LoginForm";
-export * from "./RegisterForm";
+export * from "./authOptions/AuthOptions";
+export * from "./loginForm/LoginForm";
+export * from "./registerForm/RegisterForm";
