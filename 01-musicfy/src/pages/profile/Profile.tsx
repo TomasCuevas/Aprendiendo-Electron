@@ -5,6 +5,7 @@ import {
   AvatarUpdate,
   DisplayNameUpdateForm,
   EmailUpdateForm,
+  PasswordUpdateForm,
 } from "@/components/profile";
 import { BasicModal } from "@/components/shared";
 
@@ -42,7 +43,7 @@ export const Profile: React.FC = () => {
 
     if (type === "password") {
       setTitleModal("Actualizar contraseña");
-      setContentModal(<h1>Form Password</h1>);
+      setContentModal(<PasswordUpdateForm onClose={onCloseModal} />);
     }
 
     setShowModal(true);
