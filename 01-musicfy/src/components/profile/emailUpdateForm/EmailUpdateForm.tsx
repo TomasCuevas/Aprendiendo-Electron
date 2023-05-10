@@ -1,5 +1,5 @@
-import { useFormik } from "formik";
 import { useState } from "react";
+import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
 import * as Yup from "yup";
 
@@ -17,12 +17,16 @@ const initialValues = () => ({
   password: "",
 });
 
+//* store *//
+import { useUserStore } from "@/store";
+
 //* interface *//
 interface Props {
   onClose(): void;
 }
 
 export const EmailUpdateForm: React.FC<Props> = ({ onClose }) => {
+  const { updateEmail } = useUserStore();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -30,7 +34,12 @@ export const EmailUpdateForm: React.FC<Props> = ({ onClose }) => {
     validationSchema: validationSchema,
     validateOnChange: false,
     onSubmit: async (formValues) => {
-      console.log(formValues);
+      try {
+        await updateEmail(formValues.email, formValues.password);
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
