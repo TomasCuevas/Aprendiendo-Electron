@@ -1,7 +1,11 @@
 import { Button } from "semantic-ui-react";
 
 //* components *//
-import { AvatarUpdate, DisplayNameUpdateForm } from "@/components/profile";
+import {
+  AvatarUpdate,
+  DisplayNameUpdateForm,
+  EmailUpdateForm,
+} from "@/components/profile";
 import { BasicModal } from "@/components/shared";
 
 //* styles *//
@@ -33,7 +37,7 @@ export const Profile: React.FC = () => {
 
     if (type === "email") {
       setTitleModal("Actualizar email");
-      setContentModal(<h1>Form Email</h1>);
+      setContentModal(<EmailUpdateForm onClose={onCloseModal} />);
     }
 
     if (type === "password") {
