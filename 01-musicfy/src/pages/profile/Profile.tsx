@@ -9,10 +9,40 @@ import "./profile.scss";
 
 //* store *//
 import { useUserStore } from "@/store";
+import { useState } from "react";
 
 export const Profile: React.FC = () => {
   const { getMe } = useUserStore();
   const user = getMe();
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [contentModal, setContentModal] = useState<any>(null);
+  const [titleModal, setTitleModal] = useState("");
+
+  const onCloseModal = () => {
+    setShowModal(false);
+    setContentModal(null);
+    setTitleModal("");
+  };
+
+  const openForm = (type: "displayName" | "email" | "password") => {
+    if (type === "displayName") {
+      setTitleModal("Actualizar nombre y apellido");
+      setContentModal(<h1>Form DisplayName</h1>);
+    }
+
+    if (type === "email") {
+      setTitleModal("Actualizar email");
+      setContentModal(<h1>Form Email</h1>);
+    }
+
+    if (type === "password") {
+      setTitleModal("Actualizar contraseña");
+      setContentModal(<h1>Form Password</h1>);
+    }
+
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -23,31 +53,25 @@ export const Profile: React.FC = () => {
             <AvatarUpdate />
             <span>{user?.displayName}</span>
           </div>
-          <Button onClick={() => console.log("Cambiar displayName")}>
-            Actualizar
-          </Button>
+          <Button onClick={() => openForm("displayName")}>Actualizar</Button>
         </div>
 
         <div className="profile__block">
           <span>Email: {user?.email}</span>
-          <Button onClick={() => console.log("Cambiar Email")}>
-            Actualizar
-          </Button>
+          <Button onClick={() => openForm("email")}>Actualizar</Button>
         </div>
 
         <div className="profile__block">
           <span>Contraseña: *********</span>
-          <Button onClick={() => console.log("Cambiar contraseña")}>
-            Actualizar
-          </Button>
+          <Button onClick={() => openForm("password")}>Actualizar</Button>
         </div>
       </div>
 
       <BasicModal
-        show={true}
-        onClose={() => console.log("Cerrar modal")}
-        title="Actualizar datos"
-        children={<h1>Contenido del Modal</h1>}
+        show={showModal}
+        onClose={onCloseModal}
+        title={titleModal}
+        children={contentModal}
       />
     </>
   );
