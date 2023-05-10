@@ -8,7 +8,7 @@ import {
 //* interfaces *//
 import { IRegister, ILogin } from "@/interfaces";
 
-//! register user
+//! register user [service]
 export const registerUser = async ({ email, password }: IRegister) => {
   try {
     const auth = getAuth();
@@ -18,7 +18,7 @@ export const registerUser = async ({ email, password }: IRegister) => {
   }
 };
 
-//! login user
+//! login user [service]
 export const loginUser = async ({ email, password }: ILogin) => {
   try {
     const auth = getAuth();
@@ -28,7 +28,7 @@ export const loginUser = async ({ email, password }: ILogin) => {
   }
 };
 
-//! logout user
+//! logout user [service]
 export const logoutUser = async () => {
   try {
     const auth = getAuth();

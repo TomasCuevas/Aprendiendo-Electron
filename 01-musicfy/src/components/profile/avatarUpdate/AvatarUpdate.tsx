@@ -5,6 +5,9 @@ import { Image } from "semantic-ui-react";
 //* assets *//
 import { defaultUser } from "@/assets";
 
+//* service *//
+import { uploadFileService } from "@/services";
+
 //* styles *//
 import "./avatarUpdate.scss";
 
@@ -17,9 +20,11 @@ export const AvatarUpdate: React.FC = () => {
 
   const [avatarUrl, setAvatarUrl] = useState(user?.photoURL || defaultUser);
 
-  const onDrop = useCallback(async (acceptedFile: any) => {
+  const onDrop = useCallback(async (acceptedFile: File[]) => {
     const file = acceptedFile[0];
     setAvatarUrl(URL.createObjectURL(file));
+
+    const response = await uploadFileService(file, "avatar", user!.uid);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
