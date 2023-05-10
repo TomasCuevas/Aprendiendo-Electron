@@ -1,7 +1,7 @@
 import { Button } from "semantic-ui-react";
 
 //* components *//
-import { AvatarUpdate } from "@/components/profile";
+import { AvatarUpdate, DisplayNameUpdateForm } from "@/components/profile";
 import { BasicModal } from "@/components/shared";
 
 //* styles *//
@@ -28,7 +28,7 @@ export const Profile: React.FC = () => {
   const openForm = (type: "displayName" | "email" | "password") => {
     if (type === "displayName") {
       setTitleModal("Actualizar nombre y apellido");
-      setContentModal(<h1>Form DisplayName</h1>);
+      setContentModal(<DisplayNameUpdateForm onClose={onCloseModal} />);
     }
 
     if (type === "email") {

@@ -5,7 +5,7 @@ import "./basicModal.scss";
 
 interface Props {
   show: boolean;
-  onClose: any;
+  onClose(): void;
   title: string;
   size?: "tiny" | "mini" | "small" | "large" | "fullscreen";
   children: React.ReactNode;
