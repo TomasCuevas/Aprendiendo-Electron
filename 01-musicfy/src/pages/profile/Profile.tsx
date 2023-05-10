@@ -1,5 +1,9 @@
-//* styles *//
 import { Button } from "semantic-ui-react";
+
+//* components *//
+import { AvatarUpdate } from "@/components/profile";
+
+//* styles *//
 import "./profile.scss";
 
 //* store *//
@@ -14,7 +18,7 @@ export const Profile: React.FC = () => {
       <h1>Configuración</h1>
       <div className="profile__block">
         <div>
-          <p>AVATAR</p>
+          <AvatarUpdate />
           <span>{user?.displayName}</span>
         </div>
         <Button onClick={() => console.log("Cambiar displayName")}>
