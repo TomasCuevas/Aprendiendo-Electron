@@ -1,5 +1,5 @@
-import { useFormik } from "formik";
 import { useState } from "react";
+import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
 import * as Yup from "yup";
 
@@ -21,12 +21,16 @@ const initialValues = () => ({
   repeatNewPassword: "",
 });
 
+//* store *//
+import { useUserStore } from "@/store";
+
 //* interface *//
 interface Props {
   onClose(): void;
 }
 
 export const PasswordUpdateForm: React.FC<Props> = ({ onClose }) => {
+  const { updatePassword } = useUserStore();
   const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
@@ -34,7 +38,12 @@ export const PasswordUpdateForm: React.FC<Props> = ({ onClose }) => {
     validationSchema: validationSchema,
     validateOnChange: false,
     onSubmit: async (formValues) => {
-      console.log(formValues);
+      try {
+        await updatePassword(formValues.password, formValues.newPassword);
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
