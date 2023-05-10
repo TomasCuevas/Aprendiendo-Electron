@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Image } from "semantic-ui-react";
 
@@ -15,8 +15,11 @@ export const AvatarUpdate: React.FC = () => {
   const { getMe } = useAuthStore();
   const user = getMe();
 
+  const [avatarUrl, setAvatarUrl] = useState(user?.photoURL || defaultUser);
+
   const onDrop = useCallback(async (acceptedFile: any) => {
-    console.log(acceptedFile);
+    const file = acceptedFile[0];
+    setAvatarUrl(URL.createObjectURL(file));
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -24,7 +27,7 @@ export const AvatarUpdate: React.FC = () => {
   return (
     <div className="avatar__update" {...getRootProps()}>
       <input {...getInputProps()} />
-      <Image src={user?.photoURL || defaultUser} />
+      <Image src={avatarUrl} />
     </div>
   );
 };
