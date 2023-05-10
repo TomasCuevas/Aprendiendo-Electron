@@ -9,11 +9,11 @@ import { logoutUser } from "@/services";
 
 //* styles *//
 import "./topBar.scss";
-import { useAuthStore } from "@/store";
+import { useUserStore } from "@/store";
 
 export const TopBar: React.FC = () => {
   const navigation = useNavigate();
-  const { getMe } = useAuthStore();
+  const { getMe } = useUserStore();
 
   const displayName = getMe()?.displayName || "Mi cuenta";
   const avatar = getMe()?.photoURL || defaultUser;

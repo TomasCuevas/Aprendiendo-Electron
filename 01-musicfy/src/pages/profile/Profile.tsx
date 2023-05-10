@@ -7,10 +7,10 @@ import { AvatarUpdate } from "@/components/profile";
 import "./profile.scss";
 
 //* store *//
-import { useAuthStore } from "@/store";
+import { useUserStore } from "@/store";
 
 export const Profile: React.FC = () => {
-  const { getMe } = useAuthStore();
+  const { getMe } = useUserStore();
   const user = getMe();
 
   return (

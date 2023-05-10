@@ -6,16 +6,16 @@ import { Image } from "semantic-ui-react";
 import { defaultUser } from "@/assets";
 
 //* service *//
-import { uploadFileService } from "@/services";
+import { getUrlFile, uploadFileService } from "@/services";
 
 //* styles *//
 import "./avatarUpdate.scss";
 
 //* store *//
-import { useAuthStore } from "@/store";
+import { useUserStore } from "@/store";
 
 export const AvatarUpdate: React.FC = () => {
-  const { getMe } = useAuthStore();
+  const { getMe, updateAvatar } = useUserStore();
   const user = getMe();
 
   const [avatarUrl, setAvatarUrl] = useState(user?.photoURL || defaultUser);
@@ -25,6 +25,8 @@ export const AvatarUpdate: React.FC = () => {
     setAvatarUrl(URL.createObjectURL(file));
 
     const response = await uploadFileService(file, "avatar", user!.uid);
+    const url = await getUrlFile(response.metadata.fullPath);
+    await updateAvatar(url);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
