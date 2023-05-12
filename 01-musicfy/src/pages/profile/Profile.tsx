@@ -30,7 +30,7 @@ export const Profile: React.FC = () => {
     setTitleModal("");
   };
 
-  const openForm = (type: "displayName" | "email" | "password") => {
+  const openModal = (type: "displayName" | "email" | "password") => {
     if (type === "displayName") {
       setTitleModal("Actualizar nombre y apellido");
       setContentModal(<DisplayNameUpdateForm onClose={onCloseModal} />);
@@ -58,17 +58,17 @@ export const Profile: React.FC = () => {
             <AvatarUpdate />
             <span>{user?.displayName}</span>
           </div>
-          <Button onClick={() => openForm("displayName")}>Actualizar</Button>
+          <Button onClick={() => openModal("displayName")}>Actualizar</Button>
         </div>
 
         <div className="profile__block">
           <span>Email: {user?.email}</span>
-          <Button onClick={() => openForm("email")}>Actualizar</Button>
+          <Button onClick={() => openModal("email")}>Actualizar</Button>
         </div>
 
         <div className="profile__block">
           <span>Contraseña: *********</span>
-          <Button onClick={() => openForm("password")}>Actualizar</Button>
+          <Button onClick={() => openModal("password")}>Actualizar</Button>
         </div>
       </div>
 
