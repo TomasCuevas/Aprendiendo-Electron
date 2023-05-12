@@ -17,6 +17,7 @@
     "pree2e": "vite build --mode=test"
   },
   "dependencies": {
+    "classnames": "2.3.2",
     "electron-updater": "5.3.0",
     "firebase": "9.21.0",
     "formik": "2.2.9",
