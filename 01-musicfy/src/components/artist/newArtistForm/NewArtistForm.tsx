@@ -3,9 +3,13 @@ import { Form, Image } from "semantic-ui-react";
 import { useDropzone } from "react-dropzone";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { v4 as uuid } from "uuid";
 
 //* assets *//
 import { noImage } from "@/assets";
+
+//* services *//
+import { createArtist, getUrlFile, uploadFileService } from "@/services";
 
 //* styles *//
 import "./newArtistForm.scss";
@@ -37,8 +41,18 @@ export const NewArtistForm: React.FC<Props> = ({ onClose }) => {
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     validateOnChange: false,
-    onSubmit: (formValues) => {
-      console.log(formValues);
+    onSubmit: async (formValues) => {
+      try {
+        const { file, name } = formValues;
+        const response = await uploadFileService(file!, "artists", uuid());
+
+        const imageUrl = await getUrlFile(response.metadata.fullPath);
+
+        await createArtist(imageUrl, name);
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
