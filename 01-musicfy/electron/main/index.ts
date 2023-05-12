@@ -45,8 +45,8 @@ async function createWindow() {
   win = new BrowserWindow({
     title: "MusicFy",
     icon: join(process.env.PUBLIC, "favicon.ico"),
-    width: 1280,
-    height: 800,
+    width: 1400,
+    height: 850,
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production

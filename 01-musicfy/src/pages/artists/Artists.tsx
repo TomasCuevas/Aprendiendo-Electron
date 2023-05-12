@@ -3,11 +3,17 @@ import { useEffect, useState } from "react";
 //* services *//
 import { getAllArtists } from "@/services";
 
+//* components *//
+import { ListArtists } from "@/components/artist";
+
+//* styles *//
+import "./artists.scss";
+
 //* interface *//
 import { IArtist } from "@/interfaces";
 
 export const Artists: React.FC = () => {
-  const [artists, setArtists] = useState<IArtist[] | any[]>([]);
+  const [artists, setArtists] = useState<IArtist[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -21,8 +27,9 @@ export const Artists: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="artists__page">
       <h1>Artists</h1>
+      <ListArtists artists={artists} />
     </div>
   );
 };

@@ -1,0 +1,12 @@
+@import "@/scss/index.scss";
+
+.artists__page {
+  padding: 20px 40px;
+
+  > h1 {
+    font-size: 35px;
+    border-bottom: 1px solid $border-primary;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+  }
+}

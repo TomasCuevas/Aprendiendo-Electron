@@ -7,6 +7,9 @@ import { database } from "@/utils";
 //* collection name
 const COLLECTION_ARTIST_NAME = "artists";
 
+//* interfaces *//
+import { IArtist } from "@/interfaces";
+
 //! create artist [service]
 export const createArtist = async (image: string, name: string) => {
   try {
@@ -27,7 +30,7 @@ export const getAllArtists = async () => {
     const docRef = collection(database, COLLECTION_ARTIST_NAME);
     const snapshot = await getDocs(docRef);
 
-    return snapshot.docs.map((doc) => doc.data());
+    return snapshot.docs.map((doc) => doc.data()) as IArtist[];
   } catch (error) {
     throw error;
   }
