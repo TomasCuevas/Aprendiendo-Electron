@@ -31,7 +31,7 @@ interface Props {
 }
 
 export const NewArtistForm: React.FC<Props> = ({ onClose }) => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<string>();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -42,7 +42,11 @@ export const NewArtistForm: React.FC<Props> = ({ onClose }) => {
     },
   });
 
-  const onDrop = useCallback(async (acceptedFile: File[]) => {}, []);
+  const onDrop = useCallback(async (acceptedFile: File[]) => {
+    const file = acceptedFile[0];
+    setImage(URL.createObjectURL(file));
+    formik.setFieldValue("file", file);
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
