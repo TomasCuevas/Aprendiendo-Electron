@@ -7,6 +7,7 @@ import { BasicModal } from "@/components/shared";
 
 //* styles *//
 import "./leftMenu.scss";
+import { NewArtistForm } from "@/components/artist";
 
 export const LeftMenu: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -26,7 +27,7 @@ export const LeftMenu: React.FC = () => {
   const openModal = (type: "artist" | "album" | "song") => {
     if (type === "artist") {
       setTitleModal("Nuevo artista");
-      setContentModal(<p>Formulario nuevo artista</p>);
+      setContentModal(<NewArtistForm onClose={onCloseModal} />);
     }
 
     if (type === "album") {
