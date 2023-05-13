@@ -1,0 +1,16 @@
+@import "@/scss/index.scss";
+
+.artist__page {
+  &-slider {
+    margin: 50px;
+
+    > h2 {
+      color: $font-gray;
+      font-weight: 100;
+      font-size: 22px;
+      border-bottom: 1px solid $font-gray;
+      padding-bottom: 8px;
+      margin-bottom: 30px;
+    }
+  }
+}

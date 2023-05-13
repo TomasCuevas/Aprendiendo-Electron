@@ -4,6 +4,12 @@ import { useParams } from "react-router-dom";
 //* service *//
 import { getOneArtist } from "@/services";
 
+//* components *//
+import { ArtistBanner } from "@/components/artist";
+
+//* styles *//
+import "./artist.scss";
+
 //* interface *//
 import { IArtist } from "@/interfaces";
 
@@ -22,9 +28,19 @@ export const Artist: React.FC = () => {
     })();
   }, [id]);
 
+  if (!artist) return <></>;
+
   return (
-    <div>
-      <h1>Artist</h1>
+    <div className="artist__page">
+      <ArtistBanner image={artist.image} name={artist.name} />
+
+      <div className="artist__page-slider">
+        <h2>ALBUMES</h2>
+      </div>
+
+      <div className="artist__page-slider">
+        <h2>CANCIONES</h2>
+      </div>
     </div>
   );
 };
