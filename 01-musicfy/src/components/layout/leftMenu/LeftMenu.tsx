@@ -7,6 +7,7 @@ import { BasicModal } from "@/components/shared";
 
 //* styles *//
 import "./leftMenu.scss";
+import { AddAlbumForm } from "@/components/albums";
 import { NewArtistForm } from "@/components/artist";
 
 export const LeftMenu: React.FC = () => {
@@ -32,7 +33,7 @@ export const LeftMenu: React.FC = () => {
 
     if (type === "album") {
       setTitleModal("Nuevo album");
-      setContentModal(<p>Formulario nuevo album</p>);
+      setContentModal(<AddAlbumForm onClose={onCloseModal} />);
     }
 
     if (type === "song") {
