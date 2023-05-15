@@ -6,6 +6,7 @@ import { getAllAlbumsByArtist, getOneArtist } from "@/services";
 
 //* components *//
 import { ArtistBanner } from "@/components/artist";
+import { Slider } from "@/components/shared";
 
 //* styles *//
 import "./artist.scss";
@@ -48,6 +49,7 @@ export const Artist: React.FC = () => {
 
       <div className="artist__page-slider">
         <h2>ALBUMES</h2>
+        <Slider data={albums || []} basepath="album" />
       </div>
 
       <div className="artist__page-slider">
