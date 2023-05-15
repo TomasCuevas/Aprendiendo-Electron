@@ -30,8 +30,8 @@ export const NewArtistForm: React.FC<Props> = ({ onClose }) => {
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {
-        const { file, name } = formValues;
-        const response = await uploadFileService(file!, "artists", uuid());
+        const { image, name } = formValues;
+        const response = await uploadFileService(image!, "artists", uuid());
 
         const imageUrl = await getUrlFile(response.metadata.fullPath);
 
@@ -56,7 +56,7 @@ export const NewArtistForm: React.FC<Props> = ({ onClose }) => {
       <div
         {...getRootProps()}
         className={classNames("new__artist-form-banner", {
-          error: formik.errors.file,
+          error: formik.errors.image,
         })}
       >
         <input {...getInputProps()} />

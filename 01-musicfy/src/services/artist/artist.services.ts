@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid";
 //* database *//
 import { database } from "@/utils";
 
-//* collection name
-const ARTISTS_COLLECTION = "artists";
+//* collection name *//
+const COLLECTION_NAME = "artists";
 
 //* interfaces *//
 import { IArtist } from "@/interfaces";
@@ -14,10 +14,10 @@ import { IArtist } from "@/interfaces";
 export const createArtist = async (image: string, name: string) => {
   try {
     const idArtist = uuid();
-    const createdAt = new Date().getTime();
+    const createdAt = new Date();
     const data = { id: idArtist, image, name, createdAt };
 
-    const docRef = doc(database, ARTISTS_COLLECTION, idArtist);
+    const docRef = doc(database, COLLECTION_NAME, idArtist);
     await setDoc(docRef, data);
   } catch (error) {
     throw error;
@@ -27,7 +27,7 @@ export const createArtist = async (image: string, name: string) => {
 //! get all artists [service]
 export const getAllArtists = async () => {
   try {
-    const docRef = collection(database, ARTISTS_COLLECTION);
+    const docRef = collection(database, COLLECTION_NAME);
     const snapshot = await getDocs(docRef);
 
     return snapshot.docs.map((doc) => doc.data()) as IArtist[];
@@ -39,7 +39,7 @@ export const getAllArtists = async () => {
 //! get one arstist [service]
 export const getOneArtist = async (id: string) => {
   try {
-    const docRef = doc(database, ARTISTS_COLLECTION, id);
+    const docRef = doc(database, COLLECTION_NAME, id);
     const snapshot = await getDoc(docRef);
 
     return snapshot.data() as IArtist;

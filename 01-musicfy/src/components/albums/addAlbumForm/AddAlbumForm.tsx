@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { Form, Image } from "semantic-ui-react";
 import { useFormik } from "formik";
 import classNames from "classnames";
+import { v4 as uuid } from "uuid";
 
 //* assets *//
 import { noImage } from "@/assets";
@@ -11,7 +12,12 @@ import { noImage } from "@/assets";
 import { initialValues, validationSchema } from "./addAlbumForm.data";
 
 //* services *//
-import { getAllArtists } from "@/services";
+import {
+  createAlbum,
+  getAllArtists,
+  getUrlFile,
+  uploadFileService,
+} from "@/services";
 
 //* styles *//
 import "./addAlbumForm.scss";
@@ -32,7 +38,16 @@ export const AddAlbumForm: React.FC<Props> = ({ onClose }) => {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValues) => {
-      console.log(formValues);
+      try {
+        const { artist, image, name } = formValues;
+        const response = await uploadFileService(image!, "albums", uuid());
+
+        const url = await getUrlFile(response.metadata.fullPath);
+        await createAlbum(name, url, artist);
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
