@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Grid, Loader } from "semantic-ui-react";
 
 //* styles *//
@@ -5,7 +6,6 @@ import "./listArtists.scss";
 
 //* interfaces *//
 import { IArtist } from "@/interfaces";
-import { Link } from "react-router-dom";
 
 interface Props {
   artists: IArtist[];

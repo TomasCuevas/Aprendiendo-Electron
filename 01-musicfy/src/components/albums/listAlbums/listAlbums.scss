@@ -1,0 +1,17 @@
+@import "@/scss/index.scss";
+
+.list__albums {
+  &-album {
+    margin-bottom: 20px !important;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    > p {
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+}
