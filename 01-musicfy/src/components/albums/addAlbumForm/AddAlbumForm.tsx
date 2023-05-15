@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { Form, Image } from "semantic-ui-react";
 import { useFormik } from "formik";
@@ -10,16 +10,22 @@ import { noImage } from "@/assets";
 //* form data *//
 import { initialValues, validationSchema } from "./addAlbumForm.data";
 
+//* services *//
+import { getAllArtists } from "@/services";
+
 //* styles *//
 import "./addAlbumForm.scss";
 
-//* interface *//
+//* interfaces *//
+import { IArtistOption } from "@/interfaces";
+
 interface Props {
   onClose(): void;
 }
 
 export const AddAlbumForm: React.FC<Props> = ({ onClose }) => {
   const [image, setImage] = useState(noImage);
+  const [artistOptions, setArtistOptions] = useState<IArtistOption[]>([]);
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -38,6 +44,24 @@ export const AddAlbumForm: React.FC<Props> = ({ onClose }) => {
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getAllArtists();
+        const newData: IArtistOption[] = response.map((artist) => ({
+          key: artist.id,
+          text: artist.name,
+          value: artist.id,
+        }));
+
+        setArtistOptions(newData);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
   return (
     <Form onSubmit={formik.handleSubmit} className="add__album-form">
       <div className="add__album-form-content">
@@ -60,11 +84,14 @@ export const AddAlbumForm: React.FC<Props> = ({ onClose }) => {
             error={formik.errors.name ? true : false}
           />
           <Form.Dropdown
+            value={formik.values.artist}
+            onChange={(_, data) => formik.setFieldValue("artist", data.value)}
             placeholder="El álbum pertenece..."
             fluid
             search
             selection
-            options={[]}
+            options={artistOptions}
+            error={formik.errors.artist ? true : false}
           />
         </div>
       </div>

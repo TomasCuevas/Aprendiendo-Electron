@@ -4,3 +4,9 @@ export interface IArtist {
   id: string;
   createdAt: Date;
 }
+
+export interface IArtistOption {
+  key: string;
+  text: string;
+  value: string;
+}
