@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Loader } from "semantic-ui-react";
 
-//* services *//
+//* service *//
 import { getOneAlbum } from "@/services";
+
+//* components *//
+import { AlbumInfo } from "@/components/albums";
+
+//* styles *//
+import "./album.scss";
 
 //* interface *//
 import { IAlbum } from "@/interfaces";
@@ -22,9 +29,16 @@ export const Album: React.FC = () => {
     })();
   }, [id]);
 
+  if (!album)
+    return (
+      <Loader active inline="centered" size="large">
+        Cargando
+      </Loader>
+    );
+
   return (
-    <div>
-      <h1>Album</h1>
+    <div className="album__page">
+      <AlbumInfo album={album} />
     </div>
   );
 };

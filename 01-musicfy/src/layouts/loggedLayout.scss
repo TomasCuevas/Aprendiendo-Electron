@@ -20,7 +20,7 @@ $leftMenuWidth: 300px;
   &-children-content {
     width: calc(100vw - $leftMenuWidth);
     height: calc(100vh - $footerHeigh);
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   &-top-bar {
