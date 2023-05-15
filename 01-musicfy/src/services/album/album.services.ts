@@ -1,4 +1,12 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 
 //* database *//
@@ -33,6 +41,20 @@ export const getAllAlbums = async () => {
   try {
     const collectionRef = collection(database, COLLECTION_NAME);
     const snapshot = await getDocs(collectionRef);
+
+    return snapshot.docs.map((doc) => doc.data()) as IAlbum[];
+  } catch (error) {
+    throw error;
+  }
+};
+
+//! get all albums by artist [service]
+export const getAllAlbumsByArtist = async (artistId: string) => {
+  try {
+    const whereRef = where("artist", "==", artistId);
+    const collectionRef = collection(database, COLLECTION_NAME);
+    const queryRef = query(collectionRef, whereRef);
+    const snapshot = await getDocs(queryRef);
 
     return snapshot.docs.map((doc) => doc.data()) as IAlbum[];
   } catch (error) {

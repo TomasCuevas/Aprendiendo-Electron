@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 //* service *//
-import { getOneArtist } from "@/services";
+import { getAllAlbumsByArtist, getOneArtist } from "@/services";
 
 //* components *//
 import { ArtistBanner } from "@/components/artist";
@@ -11,10 +11,11 @@ import { ArtistBanner } from "@/components/artist";
 import "./artist.scss";
 
 //* interface *//
-import { IArtist } from "@/interfaces";
+import { IAlbum, IArtist } from "@/interfaces";
 
 export const Artist: React.FC = () => {
   const [artist, setArtist] = useState<IArtist>();
+  const [albums, setAlbums] = useState<IAlbum[]>();
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +23,17 @@ export const Artist: React.FC = () => {
       try {
         const response = await getOneArtist(id!);
         setArtist(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getAllAlbumsByArtist(id!);
+        setAlbums(response);
       } catch (error) {
         console.error(error);
       }
