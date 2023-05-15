@@ -1,19 +1,9 @@
 import { useUserStore } from "@/store";
 import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
-import * as Yup from "yup";
 
-//* yup validations *//
-const validationSchema = () => {
-  return Yup.object({
-    displayName: Yup.string().required(),
-  });
-};
-
-//* form values *//
-const initialValues = (value: string) => ({
-  displayName: value,
-});
+//* form data *//
+import { initialValues, validationSchema } from "./displayNameUpdateForm.data";
 
 //* interface *//
 interface Props {
@@ -25,7 +15,7 @@ export const DisplayNameUpdateForm: React.FC<Props> = ({ onClose }) => {
 
   const formik = useFormik({
     initialValues: initialValues(getMe()!.displayName || ""),
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {

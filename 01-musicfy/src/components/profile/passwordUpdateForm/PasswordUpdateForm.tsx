@@ -1,25 +1,9 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
-import * as Yup from "yup";
 
-//* yup validations *//
-const validationSchema = () => {
-  return Yup.object({
-    password: Yup.string().required(),
-    newPassword: Yup.string().required(),
-    repeatNewPassword: Yup.string()
-      .required()
-      .oneOf([Yup.ref("newPassword")]),
-  });
-};
-
-//* form values *//
-const initialValues = () => ({
-  password: "",
-  newPassword: "",
-  repeatNewPassword: "",
-});
+//* form data *//
+import { initialValues, validationSchema } from "./passwordUpdateForm.data";
 
 //* store *//
 import { useUserStore } from "@/store";

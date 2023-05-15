@@ -2,8 +2,8 @@ import { useCallback, useState } from "react";
 import { Form, Image } from "semantic-ui-react";
 import { useDropzone } from "react-dropzone";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { v4 as uuid } from "uuid";
+import classNames from "classnames";
 
 //* assets *//
 import { noImage } from "@/assets";
@@ -11,24 +11,11 @@ import { noImage } from "@/assets";
 //* services *//
 import { createArtist, getUrlFile, uploadFileService } from "@/services";
 
+//* form data *//
+import { initialValues, validationSchema } from "./newArtistForm.data";
+
 //* styles *//
 import "./newArtistForm.scss";
-import classNames from "classnames";
-
-//* yup validations *//
-const validationSchema = () => {
-  return Yup.object({
-    file: Yup.string().required(),
-    name: Yup.string().required(),
-  });
-};
-
-//* form values *//
-const initialValues = () => ({
-  name: "",
-  file: null,
-});
-
 //* interface *//
 interface Props {
   onClose(): void;

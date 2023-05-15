@@ -1,29 +1,15 @@
 import { useState } from "react";
 import { Form, Icon } from "semantic-ui-react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 //* service *//
 import { registerUser } from "@/services";
 
+//* form data *//
+import { initialValues, validationSchema } from "./registerForm.data";
+
 //* styles *//
 import "./registerForm.scss";
-
-//* yup validations *//
-const validationSchema = () => {
-  return Yup.object({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
-    username: Yup.string().required(),
-  });
-};
-
-//* form values *//
-const initialValues = {
-  email: "",
-  password: "",
-  username: "",
-};
 
 //* interface *//
 interface Props {
@@ -33,8 +19,8 @@ interface Props {
 
 export const RegisterForm: React.FC<Props> = ({ goBack, goLogin }) => {
   const formik = useFormik({
-    initialValues: initialValues,
-    validationSchema: validationSchema,
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {

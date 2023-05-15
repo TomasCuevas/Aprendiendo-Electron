@@ -1,21 +1,9 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
-import * as Yup from "yup";
 
-//* yup validations *//
-const validationSchema = () => {
-  return Yup.object({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
-  });
-};
-
-//* form values *//
-const initialValues = () => ({
-  email: "",
-  password: "",
-});
+//* form data *//
+import { initialValues, validationSchema } from "./emailUpdateForm.data";
 
 //* store *//
 import { useUserStore } from "@/store";
@@ -31,7 +19,7 @@ export const EmailUpdateForm: React.FC<Props> = ({ onClose }) => {
 
   const formik = useFormik({
     initialValues: initialValues(),
-    validationSchema: validationSchema,
+    validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValues) => {
       try {
