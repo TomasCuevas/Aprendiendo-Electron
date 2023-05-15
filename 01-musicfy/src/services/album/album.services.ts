@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 
 //* database *//
@@ -35,6 +35,18 @@ export const getAllAlbums = async () => {
     const snapshot = await getDocs(collectionRef);
 
     return snapshot.docs.map((doc) => doc.data()) as IAlbum[];
+  } catch (error) {
+    throw error;
+  }
+};
+
+//! get one album [service]
+export const getOneAlbum = async (id: string) => {
+  try {
+    const docRef = doc(database, COLLECTION_NAME, id);
+    const snapshot = await getDoc(docRef);
+
+    return snapshot.data() as IAlbum;
   } catch (error) {
     throw error;
   }
