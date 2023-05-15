@@ -3,12 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 
 //* components *//
+import { AddAlbumForm } from "@/components/album";
 import { BasicModal } from "@/components/shared";
+import { NewArtistForm } from "@/components/artist";
 
 //* styles *//
 import "./leftMenu.scss";
-import { AddAlbumForm } from "@/components/albums";
-import { NewArtistForm } from "@/components/artist";
 
 export const LeftMenu: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);

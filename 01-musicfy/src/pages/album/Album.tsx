@@ -6,7 +6,7 @@ import { Loader } from "semantic-ui-react";
 import { getOneAlbum } from "@/services";
 
 //* components *//
-import { AlbumInfo } from "@/components/albums";
+import { AlbumInfo } from "@/components/album";
 
 //* styles *//
 import "./album.scss";

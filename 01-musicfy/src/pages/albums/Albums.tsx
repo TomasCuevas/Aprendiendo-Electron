@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 //* services *//
 import { getAllAlbums } from "@/services";
 
+//* components *//
+import { ListAlbums } from "@/components/album";
+
 //* styles *//
 import "./albums.scss";
 
 //* interface *//
 import { IAlbum } from "@/interfaces";
-import { ListAlbums } from "@/components/albums";
 
 export const Albums: React.FC = () => {
   const [albums, setAlbums] = useState<IAlbum[]>([]);
