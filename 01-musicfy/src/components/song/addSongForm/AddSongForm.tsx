@@ -3,16 +3,24 @@ import { Form, Icon } from "semantic-ui-react";
 import { useFormik } from "formik";
 import classNames from "classnames";
 import { useDropzone } from "react-dropzone";
+import { v4 as uuid } from "uuid";
 
 //* form data *//
 import { initialValues, validationSchema } from "./addSongForm.data";
+
+//* services *//
+import {
+  createSongService,
+  getAllAlbums,
+  getUrlFile,
+  uploadSognService,
+} from "@/services";
 
 //* styles *//
 import "./addSongForm.scss";
 
 //* interface *//
 import { IAlbumOption } from "@/interfaces";
-import { getAllAlbums } from "@/services";
 
 interface Props {
   onClose(): void;
@@ -27,7 +35,17 @@ export const AddSongForm: React.FC<Props> = ({ onClose }) => {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValues) => {
-      console.log(formValues);
+      try {
+        const { album, file, name } = formValues;
+
+        const response = await uploadSognService(file!, "songs", uuid());
+        const url = await getUrlFile(response.metadata.fullPath);
+        await createSongService(name, album, url);
+
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
@@ -93,7 +111,7 @@ export const AddSongForm: React.FC<Props> = ({ onClose }) => {
         </div>
       </div>
 
-      <Form.Button type="submit" primary loading={formik.isSubmitting}>
+      <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
         Subir canción
       </Form.Button>
     </Form>

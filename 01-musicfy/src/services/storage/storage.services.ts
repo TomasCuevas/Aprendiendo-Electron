@@ -19,6 +19,25 @@ export const uploadFileService = async (
   }
 };
 
+//! upload song [service]
+export const uploadSognService = async (
+  song: File,
+  folder: string,
+  nameFile: string
+) => {
+  try {
+    const storage = getStorage();
+    const fileRef = ref(storage, `${folder}/${nameFile}`);
+
+    const metadata = { contentType: "audio/mpeg" };
+    const songBuffer = await song.arrayBuffer();
+
+    return await uploadBytes(fileRef, songBuffer, metadata);
+  } catch (error) {
+    throw error;
+  }
+};
+
 //! get url file [service]
 export const getUrlFile = async (pathFile: string) => {
   try {
