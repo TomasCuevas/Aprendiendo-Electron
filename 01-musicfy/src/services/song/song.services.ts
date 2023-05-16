@@ -1,4 +1,11 @@
-import { doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 
 //* database *//
@@ -7,6 +14,10 @@ import { database } from "@/utils";
 //* collection name *//
 const COLLECTION_NAME = "songs";
 
+//* interface *//
+import { ISong } from "@/interfaces";
+
+//! create song [service]
 export const createSongService = async (
   name: string,
   album: string,
@@ -19,6 +30,20 @@ export const createSongService = async (
 
     const docRef = doc(database, COLLECTION_NAME, id);
     await setDoc(docRef, data);
+  } catch (error) {
+    throw error;
+  }
+};
+
+//! get all songs by album [service]
+export const getAllSongsByAlbumService = async (albumId: string) => {
+  try {
+    const whereRef = where("album", "==", albumId);
+    const collectionRef = collection(database, COLLECTION_NAME);
+    const queryRef = query(collectionRef, whereRef);
+
+    const snapshot = await getDocs(queryRef);
+    return snapshot.docs.map((song) => song.data()) as ISong[];
   } catch (error) {
     throw error;
   }

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Loader } from "semantic-ui-react";
 
 //* service *//
-import { getOneAlbum } from "@/services";
+import { getAllSongsByAlbumService, getOneAlbum } from "@/services";
 
 //* components *//
 import { AlbumInfo } from "@/components/album";
@@ -11,11 +11,12 @@ import { AlbumInfo } from "@/components/album";
 //* styles *//
 import "./album.scss";
 
-//* interface *//
-import { IAlbum } from "@/interfaces";
+//* interfaces *//
+import { IAlbum, ISong } from "@/interfaces";
 
 export const Album: React.FC = () => {
   const [album, setAlbum] = useState<IAlbum>();
+  const [songs, setSongs] = useState<ISong[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,6 +24,17 @@ export const Album: React.FC = () => {
       try {
         const response = await getOneAlbum(id!);
         setAlbum(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getAllSongsByAlbumService(id!);
+        setSongs(response);
       } catch (error) {
         console.error(error);
       }
