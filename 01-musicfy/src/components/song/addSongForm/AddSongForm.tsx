@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Form, Icon } from "semantic-ui-react";
+import { useFormik } from "formik";
 import classNames from "classnames";
+
+//* form data *//
+import { initialValues, validationSchema } from "./addSongForm.data";
 
 //* styles *//
 import "./addSongForm.scss";
@@ -13,9 +17,24 @@ interface Props {
 export const AddSongForm: React.FC<Props> = ({ onClose }) => {
   const [songName, setSongName] = useState("");
 
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+    validateOnChange: false,
+    onSubmit: async (formValues) => {
+      console.log(formValues);
+    },
+  });
+
   return (
-    <Form className="add__song-form">
-      <Form.Input name="name" placeholder="Nombre de la canción" />
+    <Form onSubmit={formik.handleSubmit} className="add__song-form">
+      <Form.Input
+        value={formik.values.name}
+        onChange={formik.handleChange}
+        name="name"
+        placeholder="Nombre de la canción"
+        error={formik.errors.name ? true : false}
+      />
       <Form.Dropdown
         placeholder="Asigna la canción a un álbum"
         fluid
@@ -34,7 +53,7 @@ export const AddSongForm: React.FC<Props> = ({ onClose }) => {
         </div>
       </div>
 
-      <Form.Button type="submit" primary>
+      <Form.Button type="submit" primary loading={formik.isSubmitting}>
         Subir canción
       </Form.Button>
     </Form>
