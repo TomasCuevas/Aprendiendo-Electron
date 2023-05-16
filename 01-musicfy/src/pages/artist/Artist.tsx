@@ -16,12 +16,12 @@ import { Slider } from "@/components/shared";
 import "./artist.scss";
 
 //* interface *//
-import { IAlbum, IArtist, ISong } from "@/interfaces";
+import { IAlbum, IArtist, ISongWithImage } from "@/interfaces";
 
 export const Artist: React.FC = () => {
   const [artist, setArtist] = useState<IArtist>();
   const [albums, setAlbums] = useState<IAlbum[]>([]);
-  const [songs, setSongs] = useState<ISong[]>([]);
+  const [songs, setSongs] = useState<ISongWithImage[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export const Artist: React.FC = () => {
 
       <div className="artist__page-slider">
         <h2>Canciónes</h2>
-        <Slider data={songs} />
+        <Slider data={songs} song />
       </div>
     </div>
   );

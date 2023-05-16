@@ -16,5 +16,30 @@
       font-weight: 100;
       color: $font-light;
     }
+
+    &-block-play {
+      position: relative;
+
+      &:hover {
+        > i.icon {
+          display: flex;
+        }
+      }
+
+      > i.icon {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        font-size: 40px;
+        background-color: black;
+        opacity: 0.7;
+      }
+    }
   }
 }

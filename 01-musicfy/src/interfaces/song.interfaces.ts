@@ -5,3 +5,7 @@ export interface ISong {
   id: string;
   name: string;
 }
+
+export interface ISongWithImage extends ISong {
+  image: string;
+}
