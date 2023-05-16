@@ -11,6 +11,7 @@ const settings = {
   speed: 500,
   swipeToSlide: true,
   centerMode: true,
+  adaptiveHeight: true,
 };
 
 //* styles *//
@@ -19,7 +20,7 @@ import "./slider.scss";
 //* interface *//
 interface Props {
   data: any[];
-  basepath: string;
+  basepath?: string;
 }
 
 export const Slider: React.FC<Props> = ({ data, basepath }) => {

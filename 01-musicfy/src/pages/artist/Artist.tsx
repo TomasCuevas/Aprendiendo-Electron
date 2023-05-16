@@ -61,7 +61,7 @@ export const Artist: React.FC = () => {
             data.push(...dataTemp);
           }
 
-          console.log(data);
+          setSongs(data);
         } catch (error) {
           console.error(error);
         }
@@ -76,12 +76,13 @@ export const Artist: React.FC = () => {
       <ArtistBanner image={artist.image} name={artist.name} />
 
       <div className="artist__page-slider">
-        <h2>ALBUMES</h2>
-        <Slider data={albums || []} basepath="album" />
+        <h2>Albumes</h2>
+        <Slider data={albums} basepath="album" />
       </div>
 
       <div className="artist__page-slider">
-        <h2>CANCIONES</h2>
+        <h2>Canciónes</h2>
+        <Slider data={songs} />
       </div>
     </div>
   );
