@@ -1,0 +1,46 @@
+@import "@/scss/index.scss";
+
+.add__song-form {
+  &-file {
+    background-color: $background-secondary;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &:hover {
+      i,
+      span {
+        opacity: 0.6;
+      }
+    }
+
+    &.error {
+      border: 1px solid $danger;
+    }
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-right: 20px;
+    }
+
+    > div > p {
+      color: $font-gray;
+      margin: 0;
+
+      > span {
+        color: $font-light;
+      }
+
+      &.song__name {
+        color: $font-light;
+      }
+    }
+  }
+}

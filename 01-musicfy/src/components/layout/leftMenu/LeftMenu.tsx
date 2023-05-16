@@ -9,6 +9,7 @@ import { NewArtistForm } from "@/components/artist";
 
 //* styles *//
 import "./leftMenu.scss";
+import { AddSongForm } from "@/components/song";
 
 export const LeftMenu: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -38,7 +39,7 @@ export const LeftMenu: React.FC = () => {
 
     if (type === "song") {
       setTitleModal("Nueva canción");
-      setContentModal(<p>Formulario nueva canción</p>);
+      setContentModal(<AddSongForm onClose={onCloseModal} />);
     }
 
     setShowModal(true);
