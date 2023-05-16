@@ -7,6 +7,7 @@ import { getAllSongsByAlbumService, getOneAlbum } from "@/services";
 
 //* components *//
 import { AlbumInfo } from "@/components/album";
+import { ListSongs } from "@/components/song";
 
 //* styles *//
 import "./album.scss";
@@ -51,6 +52,7 @@ export const Album: React.FC = () => {
   return (
     <div className="album__page">
       <AlbumInfo album={album} />
+      <ListSongs songs={songs} miniature={album.image} />
     </div>
   );
 };

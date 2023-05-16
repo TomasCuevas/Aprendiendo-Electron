@@ -1,0 +1,26 @@
+@import "@/scss/index.scss";
+
+.ui.table.inverted.list__songs {
+  background-color: transparent;
+  margin-top: 20px;
+
+  th {
+    background-color: transparent;
+  }
+
+  tr {
+    cursor: pointer;
+
+    &:hover {
+      td {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.no__songs {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 16px;
+}
