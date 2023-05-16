@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 //* service *//
-import { getAllAlbumsByArtist, getOneArtist } from "@/services";
+import {
+  getAllAlbumsByArtist,
+  getAllSongsByAlbumService,
+  getOneArtist,
+} from "@/services";
 
 //* components *//
 import { ArtistBanner } from "@/components/artist";
@@ -12,11 +16,12 @@ import { Slider } from "@/components/shared";
 import "./artist.scss";
 
 //* interface *//
-import { IAlbum, IArtist } from "@/interfaces";
+import { IAlbum, IArtist, ISong } from "@/interfaces";
 
 export const Artist: React.FC = () => {
   const [artist, setArtist] = useState<IArtist>();
-  const [albums, setAlbums] = useState<IAlbum[]>();
+  const [albums, setAlbums] = useState<IAlbum[]>([]);
+  const [songs, setSongs] = useState<ISong[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -40,6 +45,29 @@ export const Artist: React.FC = () => {
       }
     })();
   }, [id]);
+
+  useEffect(() => {
+    if (albums) {
+      (async () => {
+        try {
+          let data = [];
+          for await (const item of albums) {
+            const response = await getAllSongsByAlbumService(item.id);
+            const dataTemp = response.map((dataSong) => ({
+              ...dataSong,
+              image: item.image,
+            }));
+
+            data.push(...dataTemp);
+          }
+
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    }
+  }, [albums]);
 
   if (!artist) return <></>;
 
