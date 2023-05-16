@@ -1,22 +1,26 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Form, Icon } from "semantic-ui-react";
 import { useFormik } from "formik";
 import classNames from "classnames";
+import { useDropzone } from "react-dropzone";
 
 //* form data *//
 import { initialValues, validationSchema } from "./addSongForm.data";
 
 //* styles *//
 import "./addSongForm.scss";
-import { useDropzone } from "react-dropzone";
 
 //* interface *//
+import { IAlbumOption } from "@/interfaces";
+import { getAllAlbums } from "@/services";
+
 interface Props {
   onClose(): void;
 }
 
 export const AddSongForm: React.FC<Props> = ({ onClose }) => {
   const [songName, setSongName] = useState("");
+  const [albumOptions, setAlbumOptions] = useState<IAlbumOption[]>([]);
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -36,6 +40,23 @@ export const AddSongForm: React.FC<Props> = ({ onClose }) => {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getAllAlbums();
+        const newData: IAlbumOption[] = response.map((album) => ({
+          key: album.id,
+          text: album.name,
+          value: album.id,
+        }));
+
+        setAlbumOptions(newData);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
   return (
     <Form onSubmit={formik.handleSubmit} className="add__song-form">
       <Form.Input
@@ -46,11 +67,14 @@ export const AddSongForm: React.FC<Props> = ({ onClose }) => {
         error={formik.errors.name ? true : false}
       />
       <Form.Dropdown
+        value={formik.values.album}
+        onChange={(_, data) => formik.setFieldValue("album", data.value)}
         placeholder="Asigna la canción a un álbum"
         fluid
         search
         selection
-        options={[]}
+        options={albumOptions}
+        error={formik.errors.album ? true : false}
       />
 
       <div

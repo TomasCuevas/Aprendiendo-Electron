@@ -5,3 +5,9 @@ export interface IAlbum {
   image: string;
   name: string;
 }
+
+export interface IAlbumOption {
+  key: string;
+  text: string;
+  value: string;
+}
