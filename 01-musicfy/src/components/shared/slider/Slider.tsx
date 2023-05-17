@@ -29,13 +29,14 @@ interface Props {
 
 export const Slider: React.FC<Props> = ({ data, basepath, song = false }) => {
   const [size, setSize] = useState(0);
+  const [isLoad, setIsLoad] = useState(false);
   const itemRef = useRef<any>(null);
 
   useEffect(() => {
     if (itemRef.current) {
       setSize(itemRef.current.clientWidth);
     }
-  }, [data]);
+  }, [isLoad]);
 
   return (
     <Slick {...settings} className="slider">
@@ -46,6 +47,7 @@ export const Slider: React.FC<Props> = ({ data, basepath, song = false }) => {
               key={item.id}
               className="slider__item"
               onClick={() => console.log("click en la cancion")}
+              onLoad={() => setIsLoad(true)}
               ref={itemRef}
             >
               <div className="slider__item-block-play">
@@ -66,6 +68,7 @@ export const Slider: React.FC<Props> = ({ data, basepath, song = false }) => {
             to={`/${basepath}/${item.id}`}
             key={item.id}
             className="slider__item"
+            onLoad={() => setIsLoad(true)}
             ref={itemRef}
           >
             <Image src={item.image} alt={item.name} style={{ height: size }} />
