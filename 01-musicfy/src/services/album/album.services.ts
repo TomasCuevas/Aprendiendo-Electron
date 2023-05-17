@@ -3,6 +3,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   query,
   setDoc,
   where,
@@ -69,6 +71,22 @@ export const getOneAlbum = async (id: string) => {
     const snapshot = await getDoc(docRef);
 
     return snapshot.data() as IAlbum;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//! get last albums [service]
+export const getLastAlbums = async (limitItems = 20) => {
+  try {
+    const collectionRef = collection(database, COLLECTION_NAME);
+    const orderByRef = orderBy("createdAt", "desc");
+    const limitRef = limit(limitItems);
+    const queryRef = query(collectionRef, orderByRef, limitRef);
+
+    const snapshot = await getDocs(queryRef);
+
+    return snapshot.docs.map((album) => album.data()) as IAlbum[];
   } catch (error) {
     throw error;
   }
