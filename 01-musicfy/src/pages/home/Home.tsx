@@ -1,15 +1,28 @@
-import { Button } from "semantic-ui-react";
+//* assets *//
+import { bannerHome } from "@/assets";
 
-//* service *//
-import { logoutUser } from "@/services";
+//* styles *//
+import "./home.scss";
 
 export const Home: React.FC = () => {
   return (
-    <div>
-      <h1>Home Screen</h1>
-      <Button color="red" onClick={logoutUser}>
-        Cerrar Sesión
-      </Button>
+    <div className="home__page">
+      <div
+        className="home__page-banner"
+        style={{ backgroundImage: `url(${bannerHome})` }}
+      />
+
+      <div className="home__page-slider">
+        <h2>Últimos artistas</h2>
+      </div>
+
+      <div className="home__page-slider">
+        <h2>Últimos albumes</h2>
+      </div>
+
+      <div className="home__page-slider">
+        <h2>Últimas canciónes</h2>
+      </div>
     </div>
   );
 };
