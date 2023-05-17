@@ -2,6 +2,8 @@ import {
   collection,
   doc,
   getDocs,
+  limit,
+  orderBy,
   query,
   setDoc,
   where,
@@ -44,6 +46,21 @@ export const getAllSongsByAlbumService = async (albumId: string) => {
 
     const snapshot = await getDocs(queryRef);
     return snapshot.docs.map((song) => song.data()) as ISong[];
+  } catch (error) {
+    throw error;
+  }
+};
+
+//! get last songs [service]
+export const getLastSongs = async (limitItems = 20) => {
+  try {
+    const collectionRef = collection(database, COLLECTION_NAME);
+    const orderByRef = orderBy("createdAt", "desc");
+    const limitRef = limit(limitItems);
+    const queryRef = query(collectionRef, orderByRef, limitRef);
+
+    const snapshot = await getDocs(queryRef);
+    return snapshot.docs.map((album) => album.data()) as ISong[];
   } catch (error) {
     throw error;
   }

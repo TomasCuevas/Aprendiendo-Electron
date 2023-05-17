@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { bannerHome } from "@/assets";
 
 //* services *//
-import { getLastAlbums, getLastArtists } from "@/services";
+import {
+  getLastAlbums,
+  getLastArtists,
+  getLastSongs,
+  getOneAlbum,
+} from "@/services";
 
 //* components *//
 import { Slider } from "@/components/shared";
@@ -13,11 +18,12 @@ import { Slider } from "@/components/shared";
 import "./home.scss";
 
 //* interfaces *//
-import { IAlbum, IArtist } from "@/interfaces";
+import { IAlbum, IArtist, ISongWithImage } from "@/interfaces";
 
 export const Home: React.FC = () => {
   const [lastArtists, setLastArtists] = useState<IArtist[]>([]);
   const [lastAlbums, setLastAlbums] = useState<IAlbum[]>([]);
+  const [lastSongs, setLastSongs] = useState<ISongWithImage[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -35,6 +41,27 @@ export const Home: React.FC = () => {
       try {
         const response = await getLastAlbums();
         setLastAlbums(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getLastSongs();
+
+        let data = [];
+
+        for await (const item of response) {
+          const resultAlbum = await getOneAlbum(item.album);
+          const dataTemp = { ...item, image: resultAlbum.image };
+
+          data.push(dataTemp);
+        }
+
+        setLastSongs(data);
       } catch (error) {
         console.error(error);
       }
@@ -60,6 +87,7 @@ export const Home: React.FC = () => {
 
       <div className="home__page-slider">
         <h2>Últimas canciónes</h2>
+        {lastSongs ? <Slider data={lastSongs} song /> : null}
       </div>
     </div>
   );
