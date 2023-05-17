@@ -1,4 +1,13 @@
-import { setDoc, doc, collection, getDocs, getDoc } from "firebase/firestore";
+import {
+  setDoc,
+  doc,
+  collection,
+  getDocs,
+  getDoc,
+  limit,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 
 //* database *//
@@ -43,6 +52,22 @@ export const getOneArtist = async (id: string) => {
     const snapshot = await getDoc(docRef);
 
     return snapshot.data() as IArtist;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//! get last artists [service]
+export const getLastArtists = async (limitItems = 20) => {
+  try {
+    const collectionRef = collection(database, COLLECTION_NAME);
+    const orderByRef = orderBy("createdAt", "desc");
+    const limitRef = limit(limitItems);
+    const queryRef = query(collectionRef, orderByRef, limitRef);
+
+    const snapshot = await getDocs(queryRef);
+
+    return snapshot.docs.map((artist) => artist.data()) as IArtist[];
   } catch (error) {
     throw error;
   }
