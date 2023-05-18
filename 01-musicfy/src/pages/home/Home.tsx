@@ -17,6 +17,9 @@ import { Slider } from "@/components/shared";
 //* styles *//
 import "./home.scss";
 
+//* store *//
+import { usePlayerStore } from "@/store";
+
 //* interfaces *//
 import { IAlbum, IArtist, ISongWithImage } from "@/interfaces";
 
@@ -24,6 +27,9 @@ export const Home: React.FC = () => {
   const [lastArtists, setLastArtists] = useState<IArtist[]>([]);
   const [lastAlbums, setLastAlbums] = useState<IAlbum[]>([]);
   const [lastSongs, setLastSongs] = useState<ISongWithImage[]>([]);
+
+  const store = usePlayerStore();
+  console.log(store);
 
   useEffect(() => {
     (async () => {
