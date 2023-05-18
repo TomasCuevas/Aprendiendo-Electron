@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
 //* interface *//
-import { ISong } from "@/interfaces";
+import { ISongWithImage } from "@/interfaces";
 
 interface usePlayerState {
   miniature: string;
   playing: boolean;
-  song?: ISong;
+  song?: ISongWithImage;
   volume: number;
   pause(): void;
-  playSong(): void;
+  playSong(song: ISongWithImage): void;
   resume(): void;
 }
 
@@ -21,7 +21,12 @@ export const usePlayerStore = create<usePlayerState>((set) => ({
   pause() {
     set(() => ({ playing: false }));
   },
-  playSong() {},
+  playSong(song) {
+    set(() => ({
+      song: song,
+      miniature: song.image,
+    }));
+  },
   resume() {
     set(() => ({ playing: true }));
   },

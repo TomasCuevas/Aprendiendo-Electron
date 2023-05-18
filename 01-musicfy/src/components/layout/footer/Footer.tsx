@@ -6,12 +6,17 @@ import { Player } from "@/components/shared";
 //* styles *//
 import "./footer.scss";
 
+//* store *//
+import { usePlayerStore } from "@/store";
+
 export const Footer: React.FC = () => {
+  const { miniature, song } = usePlayerStore();
+
   return (
     <div className="footer">
       <div className="footer__left">
-        <Image src={null} />
-        <span>SONG NAME</span>
+        {miniature && <Image src={miniature} alt="song image" />}
+        {song && <span>{song.name}</span>}
       </div>
 
       <div className="footer__center">

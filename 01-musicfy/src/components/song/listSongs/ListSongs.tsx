@@ -1,6 +1,10 @@
-//* styles *//
 import { Icon, Table } from "semantic-ui-react";
+
+//* styles *//
 import "./listSongs.scss";
+
+//* store *//
+import { usePlayerStore } from "@/store";
 
 //* interfaces *//
 import { ISong } from "@/interfaces";
@@ -11,6 +15,8 @@ interface Props {
 }
 
 export const ListSongs: React.FC<Props> = ({ miniature, songs }) => {
+  const { playSong } = usePlayerStore();
+
   if (songs.length < 1) {
     return <p className="no__songs">Este album aún no tiene canciónes</p>;
   }
@@ -26,7 +32,10 @@ export const ListSongs: React.FC<Props> = ({ miniature, songs }) => {
 
       <Table.Body>
         {songs.map((song) => (
-          <Table.Row key={song.id}>
+          <Table.Row
+            onClick={() => playSong({ ...song, image: miniature })}
+            key={song.id}
+          >
             <Table.Cell collapsing>
               <Icon name="play circle outline" />
             </Table.Cell>

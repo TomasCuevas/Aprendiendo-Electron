@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Slick from "react-slick";
 import { Icon, Image } from "semantic-ui-react";
@@ -17,9 +18,11 @@ const settings = {
 //* styles *//
 import "./slider.scss";
 
+//* store *//
+import { usePlayerStore } from "@/store";
+
 //* interfaces *//
 import { IAlbum, IArtist, ISongWithImage } from "@/interfaces";
-import { useEffect, useRef, useState } from "react";
 
 interface Props {
   data: IAlbum[] | ISongWithImage[] | IArtist[];
@@ -31,6 +34,8 @@ export const Slider: React.FC<Props> = ({ data, basepath, song = false }) => {
   const [size, setSize] = useState(0);
   const [isLoad, setIsLoad] = useState(false);
   const itemRef = useRef<any>(null);
+
+  const { playSong } = usePlayerStore();
 
   useEffect(() => {
     if (itemRef.current) {
@@ -46,7 +51,7 @@ export const Slider: React.FC<Props> = ({ data, basepath, song = false }) => {
             <div
               key={item.id}
               className="slider__item"
-              onClick={() => console.log("click en la cancion")}
+              onClick={() => playSong(item as ISongWithImage)}
               onLoad={() => setIsLoad(true)}
               ref={itemRef}
             >
