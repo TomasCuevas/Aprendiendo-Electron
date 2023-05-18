@@ -12,7 +12,10 @@ export const Player: React.FC = () => {
 
   return (
     <div className="player">
-      <Icon name={playing ? "pause circle outline" : "play circle outline"} />
+      <Icon
+        onClick={playing ? pause : resume}
+        name={playing ? "pause circle outline" : "play circle outline"}
+      />
       <Progress progress="value" value={30} total={100} size="tiny" />
       <ReactPlayer
         url={song?.file}
