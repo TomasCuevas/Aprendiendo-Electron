@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from "electron";
+import { app, BrowserWindow, shell, ipcMain, Menu } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
 import { update } from "./update";
@@ -47,6 +47,7 @@ async function createWindow() {
     icon: join(process.env.PUBLIC, "favicon.ico"),
     width: 1400,
     height: 850,
+    titleBarStyle: "hiddenInset",
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
@@ -55,6 +56,12 @@ async function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
     },
+  });
+
+  Menu.setApplicationMenu(null);
+
+  win.on("page-title-updated", (event) => {
+    event.preventDefault();
   });
 
   if (url) {
