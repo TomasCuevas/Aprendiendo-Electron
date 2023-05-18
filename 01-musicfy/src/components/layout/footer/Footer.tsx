@@ -10,7 +10,7 @@ import "./footer.scss";
 import { usePlayerStore } from "@/store";
 
 export const Footer: React.FC = () => {
-  const { miniature, song } = usePlayerStore();
+  const { miniature, song, volume, setVolume } = usePlayerStore();
 
   return (
     <div className="footer">
@@ -30,6 +30,8 @@ export const Footer: React.FC = () => {
           min={0}
           max={1}
           step={0.01}
+          value={volume}
+          onChange={(_, data) => setVolume(Number(data.value))}
         />
       </div>
     </div>

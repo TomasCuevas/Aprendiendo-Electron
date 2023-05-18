@@ -11,6 +11,7 @@ interface usePlayerState {
   pause(): void;
   playSong(song: ISongWithImage): void;
   resume(): void;
+  setVolume(volume: number): void;
 }
 
 export const usePlayerStore = create<usePlayerState>((set) => ({
@@ -29,5 +30,10 @@ export const usePlayerStore = create<usePlayerState>((set) => ({
   },
   resume() {
     set(() => ({ playing: true }));
+  },
+  setVolume(volume) {
+    set(() => ({
+      volume: volume,
+    }));
   },
 }));
