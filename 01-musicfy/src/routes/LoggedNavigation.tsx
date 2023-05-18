@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 //* layout *//
 import { LoggedLayout } from "@/layouts";
@@ -8,7 +8,7 @@ import { Album, Albums, Artist, Artists, Home, Profile } from "@/pages";
 
 export const LoggedNavigation: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <LoggedLayout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -19,6 +19,6 @@ export const LoggedNavigation: React.FC = () => {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </LoggedLayout>
-    </BrowserRouter>
+    </HashRouter>
   );
 };

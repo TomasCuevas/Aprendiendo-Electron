@@ -1,5 +1,5 @@
 {
-  "name": "01-spotify",
+  "name": "musicfy",
   "version": "1.0.0",
   "main": "dist-electron/main/index.js",
   "author": "Tomás Cuevas",
