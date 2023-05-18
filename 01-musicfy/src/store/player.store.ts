@@ -26,6 +26,7 @@ export const usePlayerStore = create<usePlayerState>((set) => ({
     set(() => ({
       song: song,
       miniature: song.image,
+      playing: true,
     }));
   },
   resume() {
